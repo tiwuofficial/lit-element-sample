@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1">
+
+  <title>web components</title>
+  <meta name="description" content="web components">
+</head>
+<body>
+  <my-element></my-element>
+  <my-element-2></my-element-2>
+  <my-element-3>
+    <p slot="two">Include me in slot "two".</p>
+  </my-element-3>
+  <my-element-3>
+    <p slot="one">Include me in slot "one".</p>
+    <p slot="nope">This one will not render at all.</p>
+    <p>No default slot, so this one won't render either.</p>
+  </my-element-3>
+  <my-element-4></my-element-4>
+  <my-input></my-input>
+  <my-list></my-list>
+  <script src="bundle.js"></script>
+</body>
+</html>

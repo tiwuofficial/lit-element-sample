@@ -1,25 +1,44 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html , css} from 'lit-element';
 
 class MyElement extends LitElement {
   static get properties() {
     return {
       value: { type: String },
-      list: {type: Array}
     }
+  }
+  static get styles() {
+    return css`
+      input {
+        display: block;
+        vertical-align: middle;
+        width: 100%;
+        border: 1px solid #e5e5e5;
+        padding: 8px 6px;
+        background: #FFF;
+        -webkit-appearance: none;
+        border-radius: 2px;
+        box-sizing: border-box;
+      }
+      button {
+        margin-top: 5px;
+        background-color: #FFF;
+        color: #34b792;
+        border: 1px solid #34b792;
+        -webkit-appearance: button;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        padding: 8px;
+      }
+    `;
   }
   constructor(){
     super();
     this.value = '';
-    if (localStorage.getItem('list')) {
-      this.list = JSON.parse(localStorage.getItem('list'));
-    } else {
-      this.list = [];
-    }
   }
   render() {
     return html`
-      <h2>Input</h2>
-      <input @input="${this.handleInput}">
+      <input class="input" @input="${this.handleInput}">
       <button @click="${this.handleClick}">Save</button>
     `
   }
@@ -27,8 +46,11 @@ class MyElement extends LitElement {
     this.value = e.target.value;
   }
   handleClick() {
-    this.list.push(this.value);
-    localStorage.setItem('list', JSON.stringify(this.list));
+    this.dispatchEvent(new CustomEvent('my-event', {
+      detail: {
+        value: this.value
+      }
+    }));
   }
 }
 

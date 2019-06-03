@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html , css} from 'lit-element';
 
 class MyElement extends LitElement {
   static get properties() {
@@ -8,11 +8,20 @@ class MyElement extends LitElement {
   }
   constructor() {
     super();
-    if (localStorage.getItem('list')) {
-      this.list = JSON.parse(localStorage.getItem('list'));
-    } else {
-      this.list = [];
-    }
+  }
+  static get styles() {
+    return css`
+      input {
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+        border: 1px solid #e5e5e5;
+        padding: 8px 6px;
+        background: #aaa;
+        -webkit-appearance: none;
+        border-radius: 2px;
+      }
+    `;
   }
   render() {
     return html`

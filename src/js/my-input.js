@@ -20,7 +20,6 @@ class MyElement extends LitElement {
         box-sizing: border-box;
       }
       button {
-        margin-top: 5px;
         background-color: #FFF;
         color: #34b792;
         border: 1px solid #34b792;
@@ -30,6 +29,9 @@ class MyElement extends LitElement {
         width: 100%;
         padding: 8px;
       }
+      input + button {
+        margin-top: 15px;
+      }
     `;
   }
   constructor(){
@@ -38,7 +40,7 @@ class MyElement extends LitElement {
   }
   render() {
     return html`
-      <input class="input" @input="${this.handleInput}">
+      <input class="input" .value="${this.value}" @input="${this.handleInput}">
       <button @click="${this.handleClick}">Save</button>
     `
   }
@@ -51,6 +53,7 @@ class MyElement extends LitElement {
         value: this.value
       }
     }));
+    this.value = '';
   }
 }
 

@@ -1,34 +1,45 @@
 import { LitElement, html , css} from 'lit-element';
+import './my-item';
 
 class MyElement extends LitElement {
   static get properties() {
     return {
-      list: { type: Array },
+      list: {
+        type: Array,
+        reflect: true
+      },
     };
   }
   constructor() {
     super();
   }
+  attributeChangedCallback(name, oldval, newval) {
+    console.log('attribute change: ', newval);
+    super.attributeChangedCallback(name, oldval, newval);
+  }
   static get styles() {
     return css`
-      input {
-        display: inline-block;
-        vertical-align: middle;
-        width: 100%;
-        border: 1px solid #e5e5e5;
-        padding: 8px 6px;
-        background: #aaa;
-        -webkit-appearance: none;
-        border-radius: 2px;
+      :host {
+        display: block;
+      }
+      my-item + my-item {
+        margin-top: 15px;
       }
     `;
   }
   render() {
     return html`
-      <ul>
-        ${this.list.map(i => html`<li>${i}</li>`)}
-      </ul>
+      ${this.list.map((i, index) => html`
+        <my-item value="${i}" index="${index}" @my-delete-event="${this.handleEvent}"></my-item>
+      `)}
     `;
+  }
+  handleEvent(e) {
+    this.dispatchEvent(new CustomEvent('my-delete-event', {
+      detail: {
+        index: e.detail.index
+      }
+    }));
   }
 }
 

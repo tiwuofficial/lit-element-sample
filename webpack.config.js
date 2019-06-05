@@ -2,7 +2,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    bundle: './src/js/app.js'
+    raw: './src/js/raw.js',
+    lit: './src/js/lit.js',
   },
   output: {
     path: path.join(__dirname,'dist'),

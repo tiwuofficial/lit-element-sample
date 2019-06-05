@@ -4,18 +4,11 @@ import './my-item';
 class MyElement extends LitElement {
   static get properties() {
     return {
-      list: {
-        type: Array,
-        reflect: true
-      },
+      list: {type: Array},
     };
   }
   constructor() {
     super();
-  }
-  attributeChangedCallback(name, oldval, newval) {
-    console.log('attribute change: ', newval);
-    super.attributeChangedCallback(name, oldval, newval);
   }
   static get styles() {
     return css`
